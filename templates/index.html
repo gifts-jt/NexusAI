@@ -11,58 +11,76 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
             background-color: #0d0f14;
             color: #ffffff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Animated Background Particles (Simulated via CSS) */
+        /* Animated Background Particles / Radial Glow */
         .background-glow {
             position: absolute;
-            width: 600px;
+            width: 100%;
+            max-width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
             top: -200px;
             left: 50%;
             transform: translateX(-50%);
             z-index: -1;
+            pointer-events: none;
         }
 
-        /* Navigation Bar */
+        /* Navigation Bar - Fully Responsive */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 20px 40px;
             background: rgba(13, 15, 20, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(90deg, #818cf8, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a {
             color: #a1a1aa;
             text-decoration: none;
             margin: 0 15px;
+            font-size: 15px;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
             color: #ffffff;
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .auth-buttons button {
@@ -71,47 +89,67 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.2s;
         }
 
         .btn-login {
             background: transparent;
             color: white;
-            margin-right: 10px;
+        }
+
+        .btn-login:hover {
+            color: #818cf8;
         }
 
         .btn-start {
             background: white;
             color: black;
-            transition: transform 0.2s;
         }
 
         .btn-start:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 100px 20px;
-            max-width: 800px;
+            padding: 120px 24px 60px 24px;
+            max-width: 840px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 52px;
+            margin-bottom: 24px;
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 19px;
             color: #a1a1aa;
             margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         /* Action Buttons */
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
         .cta-group button {
-            padding: 15px 30px;
+            padding: 16px 32px;
             font-size: 16px;
             border-radius: 12px;
             cursor: pointer;
@@ -123,41 +161,127 @@
         .cta-primary {
             background: linear-gradient(135deg, #6366f1, #a855f7);
             color: white;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
         }
 
         .cta-primary:hover {
-            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.45);
             transform: translateY(-2px);
         }
 
         .cta-secondary {
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            margin-left: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Glassmorphism Dashboard Preview */
+        .dashboard-container {
+            width: 100%;
+            padding: 0 24px;
+            max-width: 1100px;
+            margin: 0 auto 100px auto;
+        }
+
         .dashboard-preview {
-            width: 80%;
-            height: 400px;
-            margin: 0 auto 100px;
+            width: 100%;
+            height: 450px;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            color: #52525b;
-            font-size: 24px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            color: #71717a;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
-        /* Hidden Status text for the background tracker */
         #tracker-status {
             display: none;
+        }
+
+        /* -----------------------------------------
+           RESPONSIVE MEDIA QUERIES (Mobile Fixes)
+           ----------------------------------------- */
+        
+        /* Tablets and smaller screens (under 900px) */
+        @media (max-width: 900px) {
+            nav {
+                padding: 15px 24px;
+            }
+            .nav-links {
+                display: none; /* Desktop menu hidden on smaller devices */
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .hero p {
+                font-size: 17px;
+            }
+        }
+
+        /* Mobile phones (under 600px) */
+        @media (max-width: 600px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+
+            .auth-buttons button {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 80px 20px 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+                line-height: 1.2;
+                margin-bottom: 16px;
+            }
+
+            .hero p {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+
+            .cta-group {
+                flex-direction: column; /* Buttons row se column me convert ho jayenge */
+                width: 100%;
+                gap: 12px;
+            }
+
+            .cta-group button {
+                width: 100%; /* Mobile par buttons full width ho jayenge taaki click karna aasan ho */
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+
+            .dashboard-container {
+                padding: 0 16px;
+                margin-bottom: 60px;
+            }
+
+            .dashboard-preview {
+                height: 280px; /* Mobile layout ke hisab se dashboard height adjust ki hai */
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -175,7 +299,6 @@
             <a href="#">Pricing</a>
         </div>
         <div class="auth-buttons">
-            <!-- Added "trigger-location" class here -->
             <button class="btn-login trigger-location">Login</button>
             <button class="btn-start trigger-location">Get Started</button>
         </div>
@@ -192,8 +315,10 @@
         <p id="tracker-status"></p>
     </div>
 
-    <div class="dashboard-preview">
-        [ Dashboard UI Preview / Analytics Graph ]
+    <div class="dashboard-container">
+        <div class="dashboard-preview">
+            [ Dashboard UI Preview / Analytics Graph ]
+        </div>
     </div>
 
     <script>
