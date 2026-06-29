@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI | Admin Console</title>
+    <style>
+        /* Modern Dark Theme & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0d0f14;
+            color: #ffffff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* Branding / Header */
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Glassmorphism Table Container */
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.2);
+            color: #a1a1aa;
+            padding: 16px 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        td {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #e4e4e7;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Data formatting */
+        .ip-address {
+            font-family: monospace;
+            color: #94a3b8;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* Action Buttons */
+        .btn-map {
+            display: inline-block;
+            text-decoration: none;
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 13px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .btn-map:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Nexus AI <span class="highlight">Admin Console</span></h1>
+        <div class="badge">Live Tracking Active</div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date & Time</th>
+                    <th>IP Address</th>
+                    <th>Coordinates (Lat, Lng)</th>
+                    <th>Accuracy</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>#{{ row[0] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td><span class="ip-address">{{ row[4] }}</span></td>
+                    <td>{{ row[1] }}, {{ row[2] }}</td>
+                    <td>±{{ row[3] }} m</td>
+                    <td>
+                        <a 
+                            href="https://www.google.com/maps?q={{ row[1] }},{{ row[2] }}" 
+                            target="_blank" 
+                            class="btn-map">
+                            View on Map
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
